@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 
 export default function PokemonList({ pokemon }) {
+
     console.log({ pokemon })
   return (
     <div style={{display: 'flex'}}>
@@ -15,7 +16,7 @@ export default function PokemonList({ pokemon }) {
                         color: isActive ? "red" : ""
                     };
                 }}
-                to={`/pokemons/${p}`}
+                to={`/${p}`}
                 key={p}>
                 {p}
             </NavLink>

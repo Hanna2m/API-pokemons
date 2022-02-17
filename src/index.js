@@ -9,10 +9,9 @@ import PokemonList from './PokemonList';
 ReactDOM.render(
   <BrowserRouter>
   <Routes>
-    <Route path="/" element={<App />} />
-    <Route path="/pokemons" element={<PokemonList />}>
+    <Route path="/" element={<App />}>
       <Route path=":pokemonName" element={<Pokemon />} />
-    </Route>
+     </Route> 
 
   </Routes>
     

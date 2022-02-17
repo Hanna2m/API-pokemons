@@ -2,16 +2,20 @@ import { useParams } from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Pokemon({url}) {
+export default function Pokemon() {
     let params = useParams();
     const [pokemonData, setPokemonData] = useState({});
     const [pokemonAbility, setPokemonAbility] = useState([])
     const [pokemonImg, setPokemonImg] = useState()
 
-    
+    const name = params.pokemonName
+    const urlP = `https://pokeapi.co/api/v2/pokemon/${name}`
+
     useEffect(async() => {
-        console.log(url)
-        await axios.get(url)
+        console.log(name) 
+       
+        console.log(urlP)
+        await axios.get(urlP)
             .then(res => {
                 setPokemonData(res.data)
                 setPokemonAbility(res.data.abilities.map(p => p.ability.name+" "))
@@ -21,9 +25,7 @@ export default function Pokemon({url}) {
     
       .catch(e => console.log(e))
     
-    }, [url])
-
-
+    }, [name])
 
     return (
 
@@ -44,7 +46,6 @@ export default function Pokemon({url}) {
            
        )
        : "Loading..." }
-        {/* <p>base_experience: {pokemonData.base_experience}</p> */}
        
      </main>
     );

@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import Pokemon from "./Pokemon";
 
 function App() {
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
   const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon");
   const [nextPageUrl, setNextPageUrl] = useState();
   const [prevPageUrl, setPrevPageUrl] = useState();
@@ -18,8 +18,7 @@ function App() {
     axios.get(currentPageUrl)
       .then(res => {
         setLoading(false)
-        setPokemon(res.data.results.map(p => p.name))
-        console.log(pokemon)
+        setPokemons(res.data.results.map(p => p.name))
         setPokemonUrl(res.data.results[0].url)
         console.log(res.data.results[0].url)
         setNextPageUrl(res.data.next)
@@ -28,20 +27,9 @@ function App() {
 
       .catch(e => console.log(e))
 
-  }, [currentPageUrl])
+  }, [currentPageUrl]);
 
-//   useEffect(async() => {
-//     console.log(pokemonUrl)
-//     await axios.get(pokemonUrl)
-//         .then(res => {
-//             setPokemonData(res.data)
-//             console.log(pokemonData)
-//             console.log(res.data.name)
-//     })
-
-//   .catch(e => console.log(e))
-
-// }, [pokemonUrl])
+  
 
 
   function gotoNextPage() {
@@ -60,17 +48,17 @@ function App() {
 
   return (
     <>
-      <PokemonList pokemon={pokemon} />
+      <PokemonList pokemon={pokemons} />
       <Pagination 
       gotoNextPage={nextPageUrl ? gotoNextPage : null}
       gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
       />
-      {/* {pokemonData ? <p>Here is name {pokemonData.name}</p> : "Loading..." } */}
-      {/* <p>Here is name {pokemonData.name}</p> */}
-      <Pokemon url={pokemonUrl} />
     </>
     
   );
 }
 
 export default App;
+
+
+
