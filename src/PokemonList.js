@@ -1,5 +1,7 @@
-import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import React from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box'
 
 export default function PokemonList({ pokemon }) {
 
@@ -9,16 +11,21 @@ export default function PokemonList({ pokemon }) {
         <nav style={{padding: '1rem'}}>
             {pokemon.map(p => (
             <NavLink 
-                style={({ isActive }) => {
+                style={
+                    ({ isActive }) => {
                     return {
                         display: "block",
-                        margin: "1rem 0",
-                        color: isActive ? "red" : ""
+                        marginTop: "0.6rem",
+                        textDecorationLine: "none",
+                        color: isActive ? "#61C87B" : ""
                     };
+                   
                 }}
                 to={`/${p}`}
                 key={p}>
-                {p}
+                <Typography variant="body1" sx={{ fontWeight: 'bold'}}>
+                   {p} 
+                </Typography>
             </NavLink>
             ))}
         </nav>

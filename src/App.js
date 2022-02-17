@@ -3,6 +3,9 @@ import PokemonList  from "./PokemonList";
 import axios from "axios"
 import Pagination from "./Pagination";
 import Pokemon from "./Pokemon";
+import './App.css';
+import { Box } from "@mui/material";
+import { width } from "@mui/system";
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
@@ -10,8 +13,6 @@ function App() {
   const [nextPageUrl, setNextPageUrl] = useState();
   const [prevPageUrl, setPrevPageUrl] = useState();
   const [loading, setLoading] = useState(true);
-  const [pokemonUrl, setPokemonUrl] = useState()
-  const [pokemonData, setPokemonData] = useState()
 
   useEffect(() => {
     setLoading(true)
@@ -19,8 +20,6 @@ function App() {
       .then(res => {
         setLoading(false)
         setPokemons(res.data.results.map(p => p.name))
-        setPokemonUrl(res.data.results[0].url)
-        console.log(res.data.results[0].url)
         setNextPageUrl(res.data.next)
         setPrevPageUrl(res.data.previous)
       })
@@ -48,11 +47,19 @@ function App() {
 
   return (
     <>
-      <PokemonList pokemon={pokemons} />
-      <Pagination 
-      gotoNextPage={nextPageUrl ? gotoNextPage : null}
-      gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
+      <header>
+        <h1>Find your pokemon</h1>
+      </header>
+      <Box style={{
+        paddingLeft: "100px",
+        minwidth: "480px"}}>
+        <PokemonList pokemon={pokemons} />
+        <Pagination 
+          gotoNextPage={nextPageUrl ? gotoNextPage : null}
+          gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
       />
+      </Box>
+      
     </>
     
   );

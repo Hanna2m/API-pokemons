@@ -1,10 +1,18 @@
 import React from 'react'
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 export default function Pagination({ gotoNextPage, gotoPrevPage }) {
   return (
-    <div>
-     {gotoPrevPage && <button onClick={gotoPrevPage}>Previous</button>}
-      {gotoNextPage && <button onClick={gotoNextPage}>Next</button>}
-    </div>
+    <Stack spacing={2} direction="row">
+     {gotoPrevPage && <Button 
+        variant="contained" 
+        onClick={gotoPrevPage}
+        style={{backgroundColor: "#61C87B"}}
+        >
+            Previous
+        </Button>}
+      {gotoNextPage && <Button variant="contained" style={{backgroundColor: "#61C87B"}} onClick={gotoNextPage}>Next</Button>}
+    </Stack>
   )
 }

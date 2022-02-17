@@ -1,6 +1,11 @@
 import { useParams } from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+
 
 export default function Pokemon() {
     let params = useParams();
@@ -29,24 +34,42 @@ export default function Pokemon() {
 
     return (
 
-      <main style={{ padding: "1rem" }}>
+      <Card sx={{ maxWidth: 345 }} 
+            style={{
+                display: "flex", 
+                maxHeight: "400px", 
+                alignContent: "center", 
+                margin: "40px"}}>
        {pokemonData ? (
            <div>
-               <div>
-                    <p>Name: {pokemonData.name}</p> 
-                    <img src={pokemonImg} />
-               </div>
-               <div>
-                    <p>Base experience: {pokemonData.base_experience}</p>
-                    <p>Abilities: {pokemonAbility}</p>
-               </div>
-               
-
+               <CardMedia
+                component="img"
+                height="245"
+                image={pokemonImg}
+                alt="pokemon image"
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div" sx={{ textTransform: 'uppercase' }}>
+                    {pokemonData.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    Abilities: {pokemonAbility}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    Base experience: {pokemonData.base_experience}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    Height: {pokemonData.height}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    Weight: {pokemonData.weight}
+                    </Typography>
+                </CardContent>
            </div>
            
        )
        : "Loading..." }
        
-     </main>
+     </Card>
     );
   }
